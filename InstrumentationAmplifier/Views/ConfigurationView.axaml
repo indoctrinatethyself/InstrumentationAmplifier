@@ -1,0 +1,54 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:InstrumentationAmplifier.Controls"
+             xmlns:vm="clr-namespace:InstrumentationAmplifier.ViewModels"
+             xmlns:utils="clr-namespace:InstrumentationAmplifier.Utils"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="InstrumentationAmplifier.Views.ConfigurationView"
+             x:DataType="vm:ConfigurationViewModel">
+
+    <UserControl.Styles>
+        <StyleInclude Source="/Styles/Styles.axaml" />
+    </UserControl.Styles>
+
+    <Grid ColumnDefinitions="0.6* 0.4*" RowDefinitions="* auto" Margin="4">
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical">
+                <TextBlock FontSize="16" Margin="0 0 0 4">MQTT</TextBlock>
+                <WrapPanel Orientation="Horizontal">
+                    <TextBlock Text="Ip" FontSize="16" VerticalAlignment="Center" Margin="0 0 8 0" Focusable="True" />
+                    <TextBox Classes="input" Width="60" Margin="0" Text="{Binding Path=Ip1}"
+                             controls:Numpad.CommaAllowed="False" controls:Numpad.NegativeAllowed="False" />
+                    <TextBlock Text="." FontSize="16" VerticalAlignment="Center" Margin="4 0 4 0" />
+                    <TextBox Classes="input" Width="60" Margin="0" Text="{Binding Path=Ip2}"
+                             controls:Numpad.CommaAllowed="False" controls:Numpad.NegativeAllowed="False" />
+                    <TextBlock Text="." FontSize="16" VerticalAlignment="Center" Margin="4 0 4 0" />
+                    <TextBox Classes="input" Width="60" Margin="0" Text="{Binding Path=Ip3}"
+                             controls:Numpad.CommaAllowed="False" controls:Numpad.NegativeAllowed="False" />
+                    <TextBlock Text="." FontSize="16" VerticalAlignment="Center" Margin="4 0 4 0" />
+                    <TextBox Classes="input" Width="60" Margin="0" Text="{Binding Path=Ip4}"
+                             controls:Numpad.CommaAllowed="False" controls:Numpad.NegativeAllowed="False" />
+                    <TextBlock Text=":" FontSize="16" VerticalAlignment="Center" Margin="4 0 4 0" />
+                    <TextBox Classes="input" Width="80" Margin="0" Text="{Binding Path=Port}"
+                             controls:Numpad.CommaAllowed="False" controls:Numpad.NegativeAllowed="False" />
+                </WrapPanel>
+
+                <Button Margin="0 8 0 0"
+                        Command="{Binding ToggleCommand}" Classes="nav"
+                        Content="{utils:CompiledTernary 
+                                    Binding={CompiledBinding Path=MqttCommandListener.Enabled},
+                                    True='Отключиться', False='Подключиться'}" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Button Classes="nav" Command="{Binding Path=SaveCommand}">Сохранить</Button>
+            <Button Classes="nav" Command="{Binding Path=BackCommand}">Назад</Button>
+        </StackPanel>
+
+        <controls:Numpad Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="12 6 6 6"
+                         ParentControl="{Binding $parent[Window]}" />
+    </Grid>
+</UserControl>

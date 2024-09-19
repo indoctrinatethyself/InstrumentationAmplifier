@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <RuntimeIdentifiers>win-x64;linux-arm;linux-arm64</RuntimeIdentifiers>
+        <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <DebugType>Embedded</DebugType>
+    </PropertyGroup>
+    
+    <!--<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DebugType>portable</DebugType>
+    </PropertyGroup>-->
+
+    <ItemGroup>
+        <Folder Include="Models\"/>
+        <AvaloniaResource Include="Assets\**"/>
+        <Content Include="Data\**\*.*" CopyToOutputDirectory="PreserveNewest" />
+        <!--TargetPath="%(Filename)%(Extension)"-->
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.0.8" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.8" />
+        <PackageReference Include="Avalonia.Svg.Skia" Version="11.0.0.13" />
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.8" />
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.8" />
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.8" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+        <PackageReference Include="DynamicData" Version="8.3.27" />
+        <PackageReference Include="MathNet.Symbolics" Version="0.25.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+        <PackageReference Include="MQTTnet" Version="4.3.3.952" />
+        <PackageReference Include="System.Device.Gpio" Version="3.1.0" />
+        <PackageReference Include="System.Reactive" Version="6.0.1-preview.1" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Compile Update="Controls\UnitDefinition.cs">
+        <DependentUpon>Numpad.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Controls\IUnitValue.cs">
+        <DependentUpon>Numpad.axaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+    
+</Project>

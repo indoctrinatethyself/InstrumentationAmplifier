@@ -1,0 +1,138 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector=":is(ContentControl).nav">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Height" Value="50" />
+    </Style>
+    
+    <Style Selector=":is(TextBox).input">
+        <Setter Property="Height" Value="40" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Margin" Value="8 4 4 0" />
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="CaretBrush" Value="Transparent" />
+        <Setter Property="SelectionBrush" Value="Transparent" />
+    </Style>
+    
+    <Style Selector=":is(TextBox).numpad-selected">
+        <Setter Property="BorderBrush" Value="#FF0078D7" />
+        <Setter Property="BorderThickness" Value="2" />
+    </Style>
+
+    <Style Selector="CheckBox.lg">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid x:Name="RootGrid" ColumnDefinitions="30, *">
+                    <Border x:Name="PART_Border"
+                            Grid.ColumnSpan="2"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}" />
+
+                    <Grid VerticalAlignment="Top" Height="30">
+                        <Border x:Name="NormalRectangle"
+                                BorderBrush="{DynamicResource CheckBoxCheckBackgroundStrokeUnchecked}"
+                                Background="{DynamicResource CheckBoxCheckBackgroundFillUnchecked}"
+                                BorderThickness="{DynamicResource CheckBoxBorderThemeThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                UseLayoutRounding="False"
+                                Height="30"
+                                Width="30" />
+
+                        <Viewbox UseLayoutRounding="False">
+                            <Panel>
+                                <Panel Height="16" Width="16" />
+                                <Path x:Name="CheckGlyph"
+                                      Opacity="0"
+                                      Fill="{DynamicResource CheckBoxCheckGlyphForegroundUnchecked}"
+                                      Stretch="Uniform"
+                                      VerticalAlignment="Center"
+                                      FlowDirection="LeftToRight" />
+                            </Panel>
+                        </Viewbox>
+                    </Grid>
+                    <ContentPresenter x:Name="ContentPresenter"
+                                      Padding="8 0 0 0"
+                                      IsVisible="{TemplateBinding Content, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      Content="{TemplateBinding Content}"
+                                      Margin="{TemplateBinding Padding}"
+                                      RecognizesAccessKey="True"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      TextWrapping="Wrap"
+                                      Grid.Column="1" />
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="RadioButton.lg">
+        <!--<Setter Property="Padding" Value="0" />-->
+        <Setter Property="Template">
+            <ControlTemplate TargetType="RadioButton">
+                <Border
+                    Name="RootBorder"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}">
+                    <Grid ColumnDefinitions="30,*">
+                        <Grid Height="32" VerticalAlignment="Top">
+
+                            <Ellipse
+                                Name="OuterEllipse"
+                                Width="30"
+                                Height="30"
+                                Fill="{DynamicResource RadioButtonOuterEllipseFill}"
+                                Stroke="{DynamicResource RadioButtonOuterEllipseStroke}"
+                                StrokeThickness="{DynamicResource RadioButtonBorderThemeThickness}"
+                                UseLayoutRounding="False" />
+
+                            <Ellipse
+                                Name="CheckOuterEllipse"
+                                Width="30"
+                                Height="30"
+                                Fill="{DynamicResource RadioButtonOuterEllipseCheckedFill}"
+                                Opacity="0"
+                                Stroke="{DynamicResource RadioButtonOuterEllipseCheckedStroke}"
+                                StrokeThickness="{DynamicResource RadioButtonBorderThemeThickness}"
+                                UseLayoutRounding="False" />
+
+                            <Ellipse
+                                Name="CheckGlyph"
+                                Width="14"
+                                Height="14"
+                                Fill="{DynamicResource RadioButtonCheckGlyphFill}"
+                                Opacity="0"
+                                Stroke="{DynamicResource RadioButtonCheckGlyphStroke}"
+                                UseLayoutRounding="False" />
+                        </Grid>
+
+                        <ContentPresenter
+                            Name="PART_ContentPresenter"
+                            Grid.Column="1"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Foreground="{TemplateBinding Foreground}"
+                            RecognizesAccessKey="True" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

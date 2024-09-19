@@ -1,0 +1,36 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:InstrumentationAmplifier.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:InstrumentationAmplifier.Controls"
+        xmlns:utils="clr-namespace:InstrumentationAmplifier.Utils"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="InstrumentationAmplifier.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="InstrumentationAmplifier"
+        WindowState="Maximized">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <Panel>
+        <UserControl Content="{Binding Content}"  />
+
+        <!-- ReSharper disable once Xaml.PossibleNullReferenceException -->
+        <UserControl Content="{Binding  Path=$parent[Window].((vm:MainWindowViewModel)DataContext).DialogContent}"
+                     DataContext="{Binding DialogViewModel}"
+                     VerticalAlignment="Bottom" />
+        
+        <Grid ColumnDefinitions="0.65* 0.35*">
+            <!-- ReSharper disable once Xaml.PossibleNullReferenceException -->
+            <UserControl Grid.Column="1" 
+                         Content="{Binding  Path=$parent[Window].((vm:MainWindowViewModel)DataContext).ToastContent}"
+                         DataContext="{Binding ToastViewModel}"
+                         VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="20"
+                         VerticalContentAlignment="Stretch"/>
+        </Grid>
+    </Panel>
+</Window>

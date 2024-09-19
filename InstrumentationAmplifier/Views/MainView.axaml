@@ -1,0 +1,136 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:InstrumentationAmplifier.Controls"
+             xmlns:utils="clr-namespace:InstrumentationAmplifier.Utils"
+             xmlns:vm="clr-namespace:InstrumentationAmplifier.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="InstrumentationAmplifier.Views.MainView"
+             x:DataType="vm:MainViewModel">
+
+    <UserControl.Styles>
+        <StyleInclude Source="/Styles/Styles.axaml" />
+    </UserControl.Styles>
+
+    <Grid ColumnDefinitions="0.6* 0.4*">
+        <Grid RowDefinitions="auto auto *">
+            <Grid ColumnDefinitions="auto * auto" RowDefinitions="auto auto auto auto auto auto"
+                  Margin="6 6 0 0" IsEnabled="{Binding Path=!RemoteLock}">
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Частота" FontSize="16"
+                           VerticalAlignment="Center" TextAlignment="Right"
+                           Focusable="True" />
+                <TextBox Grid.Row="0" Grid.Column="1" Name="FrequencyTb" Classes="input"
+                         Margin="8 0 4 0"
+                         Text="{Binding Frequency.Value, Mode=OneWay, StringFormat='0.########'}"
+                         controls:Numpad.CommaAllowed="True" controls:Numpad.NegativeAllowed="False"
+                         controls:Numpad.Value="{Binding Path=Frequency}" />
+                <TextBlock Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" FontSize="16"
+                           Text="{Binding Path=Frequency.Unit}" />
+
+                <DockPanel Grid.Row="1" Grid.Column="0" Margin="0 4 0 0">
+                    <RadioButton IsChecked="{Binding OutputPowerOrGain}"
+                                 Classes="lg" Margin="0 0 8 0" DockPanel.Dock="Left" />
+                    <TextBlock Text="Pвых" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" />
+                </DockPanel>
+                <TextBox Grid.Row="1" Grid.Column="1" Name="OutputPowerTb" Classes="input"
+                         IsEnabled="{Binding OutputPowerOrGain}"
+                         Text="{Binding OutputPower.Value, Mode=OneWay, StringFormat='0.######'}"
+                         controls:Numpad.CommaAllowed="True" controls:Numpad.NegativeAllowed="True"
+                         controls:Numpad.Value="{Binding OutputPower}" />
+                <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" FontSize="16" Margin="0 4 0 0"
+                           Text="{Binding Path=OutputPower.Unit}" />
+
+                <DockPanel Grid.Row="2" Grid.Column="0" Margin="0 4 0 0">
+                    <RadioButton IsChecked="{Binding !OutputPowerOrGain}"
+                                 Classes="lg" Margin="0 0 8 0" DockPanel.Dock="Left" />
+                    <TextBlock Text="Усиление" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" />
+                </DockPanel>
+                <TextBox Grid.Row="2" Grid.Column="1" Name="GainTb" Classes="input"
+                         IsEnabled="{Binding !OutputPowerOrGain}"
+                         Text="{Binding Gain.Value, Mode=OneWay, StringFormat='0.######'}"
+                         controls:Numpad.CommaAllowed="True" controls:Numpad.NegativeAllowed="False"
+                         controls:Numpad.Value="{Binding Path=Gain}" />
+                <TextBlock Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" FontSize="16" Margin="0 4 0 0"
+                           Text="{Binding Path=Gain.Unit}" />
+
+                <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Margin="0 8 0 0">
+                    <CheckBox IsChecked="{Binding Modulation}" Margin="0 0 8 0"
+                              Classes="lg" FontSize="16">
+                        Модуляция
+                    </CheckBox>
+                </StackPanel>
+                <!--<StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="8 4 0 0"
+                            IsEnabled="{Binding Modulation}">
+                    <CheckBox IsChecked="{Binding InsideOrOutside}" />
+                    <TextBlock VerticalAlignment="Center">
+                        <Run
+                            FontWeight="{utils:CompiledTernary Binding={CompiledBinding InsideOrOutside},
+                            True='Bold', False='Normal', Type={x:Type FontWeight}}">
+                            Внутри
+                        </Run>
+                        /
+                        <Run
+                            FontWeight="{utils:CompiledTernary Binding={CompiledBinding !InsideOrOutside},
+                            True='Bold', False='Normal', Type={x:Type FontWeight}}">
+                            Извне
+                        </Run>
+                    </TextBlock>
+                </StackPanel>-->
+
+                <TextBlock Grid.Row="4" Grid.Column="0" Margin="0 4 0 0"
+                           Text="Tимп" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" />
+                <TextBox Grid.Row="4" Grid.Column="1" Name="PulseDurationTb" Classes="input"
+                         IsEnabled="{Binding Modulation}"
+                         Text="{Binding PulseDuration.Value, Mode=OneWay, StringFormat='0.########'}"
+                         controls:Numpad.CommaAllowed="True" controls:Numpad.NegativeAllowed="True"
+                         controls:Numpad.Value="{Binding Path=PulseDuration}" />
+                <TextBlock Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" FontSize="16" Margin="0 4 0 0"
+                           Text="{Binding Path=PulseDuration.Unit.Name}" />
+
+                <TextBlock Grid.Row="5" Grid.Column="0" Margin="0 4 0 0"
+                           Text="S" FontSize="16" VerticalAlignment="Center" TextAlignment="Right" />
+                <TextBox Grid.Row="5" Grid.Column="1" Classes="input"
+                         IsEnabled="{Binding Modulation}"
+                         Text="{Binding DutyCycle}"
+                         controls:Numpad.CommaAllowed="True" controls:Numpad.NegativeAllowed="True" />
+                <!--Text="{Binding DutyCycle, Mode=OneWay, StringFormat='0.########'"}-->
+                <!--controls:Numpad.Value="{Binding Path=DutyCycle}"-->
+            </Grid>
+
+            <DockPanel Grid.Row="1" Grid.Column="0" Margin="2 12 0 0">
+                <Button DockPanel.Dock="Left" Height="60"
+                        Command="{Binding OpenConfigurationCommand}">
+                    <Grid RowDefinitions="0.2* 0.6* 0.2*" ColumnDefinitions="0.2* 0.6* 0.2*">
+                        <Svg Grid.Row="1" Grid.Column="1" Path="/Assets/settings.svg" />
+                    </Grid>
+                </Button>
+                <Panel>
+                    <Button
+                        HorizontalAlignment="Stretch" Height="60"
+                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                        FontSize="18"
+                        Command="{Binding ToggleCommand}"
+                        IsVisible="{Binding Path=!RemoteLock}"
+                        Content="{utils:CompiledTernary Binding={CompiledBinding Enabled}, 
+                            True='Выключить СВЧ выход', False='Включить СВЧ выход'}"
+                        Background="{utils:CompiledTernary Binding={CompiledBinding Enabled}, 
+                            True='#500CAF12', False='#FFFA664C', Type={x:Type IBrush}}" />
+                    <Button
+                        HorizontalAlignment="Stretch" Height="60"
+                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                        FontSize="18" IsEnabled="False"
+                        IsVisible="{Binding Path=RemoteLock}"
+                        Content="Удалённое управление" />
+                </Panel>
+            </DockPanel>
+
+            <ScrollViewer Grid.Row="2" Margin="2 0 0 0">
+                <TextBlock Text="{Binding Txt}" TextWrapping="Wrap" />
+            </ScrollViewer>
+        </Grid>
+
+        <controls:Numpad Grid.Column="1" Margin="12 6 6 6" ParentControl="{Binding $parent[Window]}" />
+    </Grid>
+
+</UserControl>

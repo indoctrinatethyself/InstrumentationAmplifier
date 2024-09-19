@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="56fc186d-0138-483d-8ec1-d556f2a10f1c" name="RP-IA">
+        <fileTransfer rootFolder="/home/analog/ia" accessType="SFTP" host="192.168.1.160" port="22" sshConfigId="43677175-1c5f-4a34-8a5a-6e1398775e0a" sshConfig="analog@192.168.1.160:22 password">
+          <advancedOptions>
+            <advancedOptions controlEncoding="utf8" dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" isUseRsync="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="b1f90c34-773f-4c5f-8076-5849bbb035a8" name="RP-IA-Prod">
+        <fileTransfer rootFolder="/home/user/ia" accessType="SFTP" host="192.168.1.214" port="22" sshConfigId="dc01c19a-5033-4601-a7d7-05e963f3c40b" sshConfig="analog@192.168.1.190:22">
+          <advancedOptions>
+            <advancedOptions controlEncoding="utf8" dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" isUseRsync="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

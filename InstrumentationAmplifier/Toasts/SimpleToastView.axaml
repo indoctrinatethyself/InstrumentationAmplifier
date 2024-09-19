@@ -1,0 +1,23 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:toasts="clr-namespace:InstrumentationAmplifier.Toasts"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="InstrumentationAmplifier.Toasts.SimpleToastView"
+             x:DataType="toasts:SimpleToastViewModel">
+
+    <UserControl.Styles>
+        <StyleInclude Source="/Styles/Styles.axaml" />
+    </UserControl.Styles>
+
+    <Border Background="#dfff" BorderThickness="1" BorderBrush="#333"
+            CornerRadius="8"
+            Padding="10 20"
+            VerticalAlignment="Bottom">
+        <ScrollViewer>
+            <TextBlock Text="{Binding Text}" 
+                       FontSize="15" TextAlignment="Center" TextWrapping="Wrap" />
+        </ScrollViewer>
+    </Border>
+</UserControl>
